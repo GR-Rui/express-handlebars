@@ -11,6 +11,7 @@ var simple = require('./routes/simple');
 var logic = require('./routes/logic');
 var loop = require('./routes/loop');
 var complex = require('./routes/complex');
+var list = require('./routes/list');
 
 var app = express();
 var exphbs = require('express-handlebars');
@@ -37,6 +38,7 @@ app.use('/simple', simple);
 app.use('/logic', logic);
 app.use('/loop', loop);
 app.use('/complex', complex);
+app.use('/list?', list);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
