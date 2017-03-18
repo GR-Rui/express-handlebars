@@ -1,37 +1,18 @@
-var Promise = require('bluebird');
-var request = Promise.promisifyAll(require('request'), {multiArgs: true});
-var httpBiz = {};
+'use strict';
 
-httpBiz.getForumRecommendList = function () {
-    // Set the headers
-    var headers = {
-        'User-Agent': 'Super Agent/0.0.1',
-        'Content-Type': 'application/x-www-form-urlencoded'
-    };
+var util = require('util');
+var AbstractRequest = require('./abstract');
 
-    var options = [];
+function UsersRequest(options) {
+    options = options || {};
+    UsersRequest.super_.call(this, options);
+    this.url = this.getUrl('api', 'GetForumRecommendList.json');
+}
 
-    var formData = {category: -1, appVersion:"99"};
-    formData.type = 'subject';
-    formData.pageSize = 2;
-    formData.pageNum = 1;
+util.inherits(UsersRequest, AbstractRequest);
 
-// Configure the request
-    options[0] = {
-        url: 'http://api.snsports.cn/api/content/pc/GetForumRecommendList.json',
-        method: 'POST',
-        headers: headers,
-        form: formData
-    };
-
-// Start the request
-    request.postAsync(options[0]).spread(function (response, body) {
-        if (response.statusCode == 200) {
-            console.log(body);
-        }
-    }).then(function () {
-        console.log(11111)
-    });
+UsersRequest.prototype.getUserList = function (data) {
+    var self = this;
+    return self.post(self.headers, data);
 };
-
-module.exports = httpBiz;
+module.exports = UsersRequest;

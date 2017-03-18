@@ -1,0 +1,12 @@
+{
+  "urls": {
+    "stti": {
+      "dev": "localhost",
+      "prod": "localhost"
+    },
+    "api": {
+      "dev": "http://api.snsports.cn/api/content/pc/",
+      "prod": "http://api.snsports.cn/api/content/pc/"
+    }
+  }
+}
