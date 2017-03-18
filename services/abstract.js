@@ -2,6 +2,7 @@ var Promise = require('bluebird');
 var request = Promise.promisifyAll(require('request'), {multiArgs: true});
 var _ = require('lodash');
 var Configuration = require('../configurations');
+var Validations = require('../common-errors').Validations;
 
 
 var internals = {
@@ -41,8 +42,11 @@ var internals = {
 function AbstractRequest(options) {
     options = options || {};
     var self = this;
+    var validationErrors = [];
     this.config = new Configuration();
     this.headers = {'User-Agent': 'Super Agent/0.0.1'};
+    if (validationErrors.length > 0)
+        throw new Validations.ObjectValidationError(validationErrors);
 }
 
 /**
