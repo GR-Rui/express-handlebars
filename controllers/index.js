@@ -1,13 +1,13 @@
 "use strict";
 
 module.exports = {
-  router: {
+  demo: {
     home: require('./home'),
     simple: require('./simple'),
     logic: require('./logic'),
     loop: require('./loop'),
     complex: require('./complex'),
-    list: require('./list')
+    article: require('./article')
   }
 
 };
