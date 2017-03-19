@@ -5,13 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var helpers = require('./lib/helpers');
+var router = require('./router');
 
-var home = require('./routes/home');
-var simple = require('./routes/simple');
-var logic = require('./routes/logic');
-var loop = require('./routes/loop');
-var complex = require('./routes/complex');
-var list = require('./routes/list');
 
 var app = express();
 var exphbs = require('express-handlebars');
@@ -33,12 +28,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', home);
-app.use('/simple', simple);
-app.use('/logic', logic);
-app.use('/loop', loop);
-app.use('/complex', complex);
-app.use('/list?', list);
+router.setup(app);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
